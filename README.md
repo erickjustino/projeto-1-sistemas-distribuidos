@@ -110,7 +110,7 @@ A. Eleição Normal:
 ```bash
 kubectl exec -it process-0 -- curl -X POST http://localhost/bully/start -d '{}'
 ```
-Resultado: process-2 (maior ID) vence.
+Resultado esperado: process-2 (maior ID) vence.
 
 
 B. Falha do Líder:
@@ -122,10 +122,10 @@ Forçar nova eleição (Rapidamente, antes dele voltar)
 ```bash
 kubectl exec -it process-0 -- curl -X POST http://localhost/bully/start -d '{}'
 ```
-Resultado: process-1 assume a liderança na ausência do 2.
+Resultado esperado: process-1 assume a liderança na ausência do 2.
 
 C. Recuperação: Aguarde o process-2 voltar ao status Running (Self-healing do Kubernetes) e inicie a eleição novamente.
 ```bash
 kubectl exec -it process-0 -- curl -X POST http://localhost/bully/start -d '{}'
 ```
-Resultado: process-2 retoma a liderança.
+Resultado esperado: process-2 retoma a liderança.
