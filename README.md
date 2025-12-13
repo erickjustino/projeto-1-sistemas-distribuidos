@@ -42,7 +42,7 @@ O sistema consiste em 3 nós (`process-0`, `process-1`, `process-2`) que se comu
 ├── k8s.yaml             # Manifesto Kubernetes (StatefulSet e Service)
 ├── main.py              # Código fonte unificado (Servidor e Lógica dos Algoritmos)
 └── requirements.txt     # Dependências (FastAPI, Requests, Uvicorn)
-
+```
 
 ## ⚡ Como Executar
 
@@ -71,7 +71,7 @@ kubectl apply -f k8s.yaml
 # 5. Verificar se os pods subiram
 kubectl get pods
 # Status esperado: Running (3/3)
-
+```
 
 ## 🧪 Roteiro de Testes
 
@@ -88,7 +88,7 @@ Cenário: Se DELAY_ACK: "true" (no k8s.yaml), haverá um atraso antes da entrega
 ```bash
 kubectl exec -it process-0 -- curl -X POST http://localhost/mcast/start \
 -H "Content-Type: application/json" -d '{"msg": "Teste Multicast"}'
-
+```
 
 2. Exclusão Mútua (Ricart-Agrawala)
 Simula dois processos tentando acessar um recurso crítico ao mesmo tempo.
@@ -96,7 +96,7 @@ Simula dois processos tentando acessar um recurso crítico ao mesmo tempo.
 ```bash
 kubectl exec process-0 -- curl -X POST http://localhost/mutex/acquire -d '{}' & \
 kubectl exec process-1 -- curl -X POST http://localhost/mutex/acquire -d '{}'
-
+```
 Resultado Esperado: Um entra (🔐 ENTREI), processa e sai (👋 Saindo). Só então o segundo entra. Nunca os dois ao mesmo tempo.
 
 
@@ -106,6 +106,7 @@ O nó com maior ID (Rank) deve ser o líder.
 A. Eleição Normal:
 ```bash
 kubectl exec -it process-0 -- curl -X POST http://localhost/bully/start -d '{}'
+```
 Resultado: process-2 (maior ID) vence.
 
 
@@ -113,13 +114,15 @@ B. Falha do Líder:
 # 1. Derrubar o líder atual
 ```bash
 kubectl delete pod process-2
-
+```
 # 2. Forçar nova eleição (Rapidamente, antes dele voltar)
 ```bash
 kubectl exec -it process-0 -- curl -X POST http://localhost/bully/start -d '{}'
+```
 Resultado: process-1 assume a liderança na ausência do 2.
 
 C. Recuperação: Aguarde o process-2 voltar ao status Running (Self-healing do Kubernetes) e inicie a eleição novamente.
 ```bash
 kubectl exec -it process-0 -- curl -X POST http://localhost/bully/start -d '{}'
+```
 Resultado: process-2 retoma a liderança.
