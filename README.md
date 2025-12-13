@@ -75,15 +75,17 @@ kubectl get pods
 
 ## 🧪 Roteiro de Testes
 
-Para visualizar os logs de todos os processos ao mesmo tempo, abra um terminal dedicado:
+Para visualizar os logs de cada processo, abra uma aba de terminal para cada um:
 ```bash
-kubectl logs -f -l app=process --max-log-requests=3
-
+kubectl logs -f process-0
+kubectl logs -f process-1
+kubectl logs -f process-2
+```
 
 1. Multicast (Ordenação Total)
 Verifica se mensagens chegam na mesma ordem para todos.
 
-Cenário: Se DELAY_ACK: "true" (no k8s.yaml), haverá um atraso antes da entrega final, provando que o sistema aguarda o nó lento.
+OBS: Se DELAY_ACK: "true" (no k8s.yaml), haverá um atraso antes da entrega final, provando que o sistema aguarda o nó lento.
 
 ```bash
 kubectl exec -it process-0 -- curl -X POST http://localhost/mcast/start \
