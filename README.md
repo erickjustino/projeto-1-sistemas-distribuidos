@@ -1,4 +1,4 @@
-# 🌐 Sistemas Distribuídos: Multicast, Mutex & Eleição em Kubernetes
+# 🌐 Sistemas Distribuídos: Multicast, Exclusão mútua & Eleição em Kubernetes
 
 Este projeto implementa três algoritmos fundamentais de Sistemas Distribuídos, orquestrados em um cluster **Kubernetes** (Minikube). O objetivo é demonstrar coordenação, consistência e tolerância a falhas em um ambiente distribuído containerizado. O projeto foi desenvolvido no Google Cloud Shell.
 
