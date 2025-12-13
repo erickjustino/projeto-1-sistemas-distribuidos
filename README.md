@@ -113,11 +113,11 @@ Resultado: process-2 (maior ID) vence.
 
 
 B. Falha do Líder:
-# 1. Derrubar o líder atual
+Derrubar o líder atual
 ```bash
 kubectl delete pod process-2
 ```
-# 2. Forçar nova eleição (Rapidamente, antes dele voltar)
+Forçar nova eleição (Rapidamente, antes dele voltar)
 ```bash
 kubectl exec -it process-0 -- curl -X POST http://localhost/bully/start -d '{}'
 ```
