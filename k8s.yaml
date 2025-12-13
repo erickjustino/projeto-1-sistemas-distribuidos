@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: process-svc
+  labels:
+    app: process
+spec:
+  ports:
+  - port: 80       # Porta do Serviço
+    targetPort: 80 # Porta do Container
+    name: api
+  # clusterIP: None transforma isso num "Headless Service".
+  # Isso permite que o DNS resolva "process-0.process-svc", "process-1.process-svc", etc.
+  clusterIP: None 
+  selector:
+    app: process
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: process
+spec:
+  serviceName: "process-svc"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: process
+  template:
+    metadata:
+      labels:
+        app: process
+    spec:
+      containers:
+      - name: process-container
+        image: process:version-final
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+        env:
+        # ==========================================================
+        # CONFIGURAÇÃO DE MODO: 
+        # "true"  = Modo Prova (Process-2 atrasa o ACK)
+        # "false" = Modo Rápido (Tudo flui instantaneamente)
+        # ==========================================================
+        - name: DELAY_ACK
+          value: "false" 
+        
+        # O Kubernetes injeta o HOSTNAME automaticamente (process-0, etc)
