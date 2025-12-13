@@ -83,7 +83,7 @@ kubectl logs -f process-1
 kubectl logs -f process-2
 ```
 
-#1. Multicast (Ordenação Total)
+### 1. Multicast (Ordenação Total)
 Verifica se mensagens chegam na mesma ordem para todos.
 
 OBS: Se DELAY_ACK: "true" (no k8s.yaml), haverá um atraso antes da entrega final, provando que o sistema aguarda o nó lento.
@@ -93,7 +93,7 @@ kubectl exec -it process-0 -- curl -X POST http://localhost/mcast/start \
 -H "Content-Type: application/json" -d '{"msg": "Teste Multicast"}'
 ```
 
-#2. Exclusão Mútua (Ricart-Agrawala)
+### 2. Exclusão Mútua (Ricart-Agrawala)
 Simula dois processos tentando acessar um recurso crítico ao mesmo tempo.
 
 ```bash
@@ -103,7 +103,7 @@ kubectl exec process-1 -- curl -X POST http://localhost/mutex/acquire -d '{}'
 Resultado Esperado: Um entra (🔐 ENTREI), processa e sai (👋 Saindo). Só então o segundo entra. Nunca os dois ao mesmo tempo.
 
 
-#3. Eleição de Líder (Valentão/Bully)
+### 3. Eleição de Líder (Valentão/Bully)
 O nó com maior ID (Rank) deve ser o líder.
 
 A. Eleição Normal:
