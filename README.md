@@ -1,6 +1,6 @@
 # 🌐 Sistemas Distribuídos: Multicast, Mutex & Eleição em Kubernetes
 
-Este projeto implementa três algoritmos fundamentais de Sistemas Distribuídos, orquestrados em um cluster **Kubernetes** (Minikube). O objetivo é demonstrar coordenação, consistência e tolerância a falhas em um ambiente distribuído containerizado.
+Este projeto implementa três algoritmos fundamentais de Sistemas Distribuídos, orquestrados em um cluster **Kubernetes** (Minikube). O objetivo é demonstrar coordenação, consistência e tolerância a falhas em um ambiente distribuído containerizado. O projeto foi desenvolvido no Google Cloud Shell.
 
 ---
 
@@ -47,12 +47,13 @@ O sistema consiste em 3 nós (`process-0`, `process-1`, `process-2`) que se comu
 ## ⚡ Como Executar
 
 ### 1. Pré-requisitos
+* Bash (Linux) - WSL funciona normalmente
 * Docker
 * Minikube
 * Kubectl
 
 ### 2. Iniciar e Deploy
-Execute os passos abaixo sequencialmente no seu terminal:
+Baixe o projeto e execute os passos abaixo sequencialmente no seu terminal:
 
 ```bash
 # 1. Start do minikube com perfil multinode (2 nós, 4GB RAM, 2 CPUs)
