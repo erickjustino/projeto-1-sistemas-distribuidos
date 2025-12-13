@@ -58,7 +58,7 @@ Baixe o projeto e execute os passos abaixo sequencialmente no seu terminal:
 ```bash
 # 1. Start do minikube com perfil multinode (2 nós, 4GB RAM, 2 CPUs)
 minikube start --nodes 2 --memory 4g --cpus 2 -p multinode-cluster
-eval $(minikube docker-env -p multinode-cluster)
+eval $(minikube docker-env)
 
 # 2. Build da imagem
 docker build -t process:version-final .
