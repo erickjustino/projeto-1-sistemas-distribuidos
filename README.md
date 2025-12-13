@@ -85,7 +85,6 @@ kubectl logs -f process-2
 
 ### 1. Multicast (Ordenação Total)
 Verifica se mensagens chegam na mesma ordem para todos.
-
 OBS: Se DELAY_ACK: "true" (no k8s.yaml), haverá um atraso antes da entrega final, provando que o sistema aguarda o nó lento.
 
 ```bash
