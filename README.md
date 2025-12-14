@@ -128,3 +128,6 @@ C. Recuperação: Aguarde o process-2 voltar ao status Running (Self-healing do 
 kubectl exec -it process-0 -- curl -X POST http://localhost/bully/start -d '{}'
 ```
 Resultado esperado: process-2 retoma a liderança.
+
+> Este projeto foi desenvolvido por Erick Vinicius Justino da Silva para a disciplina de Sistemas distribuídos (DCA/UFRN).
+
